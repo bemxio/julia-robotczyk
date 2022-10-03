@@ -7,7 +7,7 @@ def fix_mojibake(text: str) -> str:
 
 # constants
 AUTHOR = "Julia Krawczyk" # the person's name to take messages from
-MESSAGE_FILES = ["raw/message_1.json", "raw/message_2.json", "raw/message_3.json" "raw/message_4.json"] # files in which the messages are contained
+MESSAGE_FILES = ["raw/message_1.json", "raw/message_2.json", "raw/message_3.json", "raw/message_4.json"] # files in which the messages are contained
 OUTPUT_PATH = "dataset.json" # the path where the dataset will be saved
 
 # main code
