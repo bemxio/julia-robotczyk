@@ -40,7 +40,7 @@ if __name__ == "__main__":
     with open("dataset.json", "r", encoding="utf-8") as file:
         dataset = json.load(file)
     
-    client = Robotczyk(dataset, ["@Julia Robotczyk", "@Kornelia Krawiec", "@Kornelia"], **credentials)
+    client = Robotczyk(dataset, ["@Julia Robotczyk", "@Kornelia"], **credentials)
     
     try:
         client.listen()
