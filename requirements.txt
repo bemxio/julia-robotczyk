@@ -1,2 +1,4 @@
-git+https://github.com/MS-Jahan/fbchat@v1
+git+https://github.com/bemxio/fbchat
 markovify==0.9.4
+spacy==3.4.1
+https://github.com/explosion/spacy-models/releases/download/pl_core_news_sm-3.4.0/pl_core_news_sm-3.4.0.tar.gz
