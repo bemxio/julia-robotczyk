@@ -32,6 +32,9 @@ class ConversationalChain:
         keyword = self.keyword(prompt)
         dataset = [text for text in self.dataset if keyword in text.lower()]
 
+        if len(dataset) < 10:
+            dataset = self.dataset # the chain won't be able to do anything with only 10 messages :sob:
+        
         if len(dataset) < 1000:
             state_size = 1
         else:
