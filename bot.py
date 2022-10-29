@@ -41,7 +41,7 @@ class RobotczykClient(fbchat.Client):
     
     # sender functions
     def send_dots(self, thread_id: str, thread_type: fbchat.ThreadType, reply_to_id: int) -> int:
-        dots = "." * random.randint(2, 20)
+        dots = "." * random.randint(2, 10)
         message = fbchat.Message(text=dots, reply_to_id=reply_to_id)
 
         return self.send(message, thread_id=thread_id, thread_type=thread_type)
