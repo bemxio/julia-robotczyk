@@ -167,5 +167,5 @@ credentials.json
 
 # Other stuff
 _ignore/
-raw/
+messages/
 dataset.json
