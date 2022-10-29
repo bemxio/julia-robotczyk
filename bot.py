@@ -1,6 +1,12 @@
+import random
+import json
+import time
+
 from modules.markov import ConversationalChain
 import fbchat
-import json
+
+def random_chance(precent: int) -> bool:
+    return random.randint(1, 100) <= precent
 
 class RobotczykClient(fbchat.Client):
     def __init__(self, chain: ConversationalChain, *args, **kwargs):
@@ -33,6 +39,13 @@ class RobotczykClient(fbchat.Client):
         
         return clean_content
     
+    # sender functions
+    def send_dots(self, thread_id: str, thread_type: fbchat.ThreadType, reply_to_id: int) -> int:
+        dots = "." * random.randint(2, 20)
+        message = fbchat.Message(text=dots, reply_to_id=reply_to_id)
+
+        return self.send(message, thread_id=thread_id, thread_type=thread_type)
+
     # event listeners
     def onMessage(self, message_object: fbchat.Message, thread_id: str, thread_type: fbchat.ThreadType, **kwargs):
         if message_object.author == self.uid:
@@ -42,12 +55,28 @@ class RobotczykClient(fbchat.Client):
             return
 
         content = self.clean_message(message_object.text)
-        response = self.chain.generate(content)
+        content = self.chain.generate(content)
 
-        message = fbchat.Message(text=response, reply_to_id=message_object.uid)
+        if random_chance(10): # chance for sending dots
+            self.send_dots(thread_id, thread_type, reply_to_id=message_object.uid)
+            response = fbchat.Message(text=content)
+        else:
+            response = fbchat.Message(text=content, reply_to_id=message_object.uid)
+        
+        time.sleep(1.0)
 
-        self.send(message, thread_id=thread_id, thread_type=thread_type)
-    
+        if not random_chance(10): # chance for sending a message for a word
+            return self.send(response, thread_id=thread_id, thread_type=thread_type)
+
+        for index, word in enumerate(content.split()):
+            if index == 0:
+                response = fbchat.Message(text=word, reply_to_id=message_object.uid)
+            else:
+                response = fbchat.Message(text=word)
+            
+            self.send(response, thread_id=thread_id, thread_type=thread_type)
+            time.sleep(0.5)
+        
 if __name__ == "__main__":
     with open("credentials.json", "r", encoding="utf-8") as file:
         credentials = json.load(file)
