@@ -60,12 +60,11 @@ class RobotczykClient(fbchat.Client):
         if random_chance(10): # chance for sending dots
             self.send_dots(thread_id, thread_type, reply_to_id=message_object.uid)
             response = fbchat.Message(text=content)
+            time.sleep(1.0)
         else:
             response = fbchat.Message(text=content, reply_to_id=message_object.uid)
-        
-        time.sleep(1.0)
 
-        if not random_chance(10): # chance for sending a message for a word
+        if len(content.split()) > 6 or not random_chance(10): # chance for sending a message for a word
             return self.send(response, thread_id=thread_id, thread_type=thread_type)
 
         for index, word in enumerate(content.split()):
