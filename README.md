@@ -14,7 +14,7 @@ Check [this](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/) link for 
 ```json
 {
     "email": "<FACEBOOK_ACCOUNT_EMAIL_HERE>",
-    "password": "<FACEBOOK_PASSWORD_EMAIL_HERE>"
+    "password": "<FACEBOOK_ACCOUNT_PASSWORD_HERE>"
 }
 ```
 4. Gather a dataset of some kind, then make a `dataset.json` file, containing an array of strings with messages used for the chain.
